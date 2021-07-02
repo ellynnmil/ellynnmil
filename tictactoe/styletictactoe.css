@@ -1,0 +1,126 @@
+body{
+  background-color: white;
+  font-family: 'Lato', sans-serif;
+  margin:0;
+}
+
+
+.gameplay{
+  max-width: 1140px;
+  margin:auto;
+  margin-top: 4.5em;
+}
+
+
+.play {
+  display: inline-block;
+  width: 65%
+  }
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+  margin:0px auto;
+  width: 400px;
+  height: 300px;
+}
+tr,
+th{
+  overflow:hidden;
+  word-break:normal;
+  width:140px;
+  height:140px;
+  }
+tr,
+td{
+  overflow:hidden;
+  width:140px;
+  height:140px;
+}
+tr th a,
+tr td a{
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.top.middle {
+  clear: both;
+  border-left: 5px solid;
+  border-right: 5px solid;
+  border-bottom: 5px solid;
+}
+.bottom.middle{
+  clear: both;
+  border-left: 5px solid;
+  border-right: 5px solid;
+  border-top: 5px solid;
+}
+.lefft{
+  clear: both;
+  border-top: 5px solid;
+  border-bottom: 5px solid;
+  border-right: 5px solid;
+}
+.righht{
+  clear: both;
+  border-top: 5px solid;
+  border-bottom: 5px solid;
+  border-left: 5px solid;
+}
+
+.score {
+display:inline-block;
+width: 34%;
+margin-left: 40.5em;
+margin-top: -25em;
+vertical-align: top;
+text-align: center;
+}
+.score h1{
+text-transform: uppercase;
+color: #096a8e;
+margin-left: -4em;
+}
+.name {
+  z-index: 1000;
+  top: 28%;
+  transform: scale(0);
+  position: absolute;
+  transition: 0.5s ease;
+  font-size: 20px;
+  text-align: left;
+  text-transform: uppercase;
+  color:gray;
+}
+input[type="text"] {
+  border: none;
+  outline: none;
+  padding: 8px;
+  width: 100%;
+  font-family: "Righteous", cursive;
+}
+input[type="submit"] {
+  border: none;
+  outline: none;
+  padding: 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  background: var(--gray);
+  color: #fff;
+  width: 100%;
+  font-family: "Righteous", cursive;
+}
+.reset{
+text-align: center;
+margin-top: 3em;
+margin-bottom: 30em;
+margin-left: 40em;
+background-color: gray;
+border-radius: 10px;
+}
+
+.reset a{
+  text-decoration: none;
+  font-size: 30px;
+  color: white;
+}

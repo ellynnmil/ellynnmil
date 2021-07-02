@@ -1,0 +1,51 @@
+<!Doctype html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styletictactoe.css">
+    <title>Tic Tac Toe game</title>
+</head>
+<body>
+
+<section class="gameplay">
+  <div class ="play">
+    <table>
+        <tr> <!-- ligne-->
+          <th class= "top left"><a href=""></a></th> <!-- case en tête -->
+          <th class= "top middle"><a href=""></a></th>
+          <th class= "top right"><a href=""></a></th>
+        </tr>
+        <tr>
+          <td class= "lefft"><a href=""></a></td><!-- case standard -->
+          <td class= "center"><a href=""></a></td>
+          <td class= "righht"><a href=""></a></td>
+        </tr>
+        <tr>
+          <td class= "bottom left"><a href=""></a></td>
+          <td class= "bottom middle"><a href=""></a></td>
+          <td class= "bottom right"><a href=""></a></td>
+        </tr>
+    </table>
+  </div>
+
+   <div class="score">
+     <h1>Score</h1>
+     <form>
+     <label for="name">Player 1</label>
+        <input  type="text"  id="player-1"  placeholder="Enter Name"  autocomplete="off"  required/>
+      <label for="name">Player 2</label>
+        <input  type="text"  id="player-2"  placeholder="Enter Name"  autocomplete="off"  required/>
+        <input type="submit" value="Submit" />
+    </form>
+   </div>
+
+ <button class="reset">
+    <a href="tictactoe.html"> Retry ?
+  </button>
+
+</section>
+  <hr>
+  <script src = "tictactoe.js"></script>
+
+</body>
+
+</html>
