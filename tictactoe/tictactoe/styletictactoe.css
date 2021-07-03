@@ -1,0 +1,134 @@
+body{
+  background-color: pink;
+  font-family: 'Lato', sans-serif;
+  margin:0;
+}
+
+
+.gameplay{
+  max-width: 1140px;
+  margin:auto;
+  margin-top: 4.5em;
+}
+
+
+.play {
+  display: inline-block;
+  width: 65%;
+  border-collapse:collapse;
+  border-spacing:0;
+  margin:0px auto;
+  width: 400px;
+  height: 300px;
+}
+tr,
+td{
+  overflow:hidden;
+  width:140px;
+  height:140px;
+  word-break:normal;
+}
+
+#t {
+  clear: both;
+  border-left: 5px solid;
+  border-right: 5px solid;
+  border-bottom: 5px solid;
+}
+#b{
+  clear: both;
+  border-left: 5px solid;
+  border-right: 5px solid;
+  border-top: 5px solid;
+}
+#left{
+  clear: both;
+  border-top: 5px solid;
+  border-bottom: 5px solid;
+  border-right: 5px solid;
+}
+#right{
+  clear: both;
+  border-top: 5px solid;
+  border-bottom: 5px solid;
+  border-left: 5px solid;
+}
+
+.Players {
+display:inline-block;
+width: 34%;
+margin-left: 40.5em;
+margin-top: -25em;
+vertical-align: top;
+text-align: center;
+}
+.Players h1{
+text-transform: uppercase;
+color: gray;
+margin-left: -4em;
+}
+.name {
+  z-index: 1000;
+  top: 28%;
+  transform: scale(0);
+  position: absolute;
+  font-size: 20px;
+  text-align: left;
+  text-transform: uppercase;
+
+}
+input[type="text"] {
+  border: none;
+  outline: none;
+  padding: 8px;
+  width: 100%;
+  font-family: "Righteous", cursive;
+  background-color: clearpink;
+}
+input[type="submit"] {
+  border: none;
+  outline: none;
+  padding: 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  background: var(--gray);
+  color: #fff;
+  width: 100%;
+  font-family: "Righteous", cursive;
+}
+.score {
+display:inline-block;
+width: 34%;
+margin-left: 40.5em;
+margin-top: -10em;
+vertical-align: top;
+text-align: left;
+}
+.score h1{
+text-transform: uppercase;
+color: gray;
+margin-left: 4em;
+}
+.score p{
+text-transform: uppercase;
+border: none;
+outline: none;
+padding: 8px;
+width: 200px;
+font-family: "Righteous";
+}
+
+.reset{
+text-align: center;
+margin-top: 3em;
+margin-bottom: 30em;
+margin-left: 40em;
+background-color: gray;
+border-radius: 10px;
+}
+
+.reset a{
+  text-decoration: none;
+  font-size: 30px;
+  color: white;
+}
