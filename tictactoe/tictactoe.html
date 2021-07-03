@@ -6,36 +6,48 @@
 </head>
 <body>
 
+  <header>
+      <h1 class="header">Tic-Tac-Toe</h1>
+      <p class="sub">Play:</p>
+    </header>
+
 <section class="gameplay">
-  <div class ="play">
-    <table>
+
+    <table class ="play">
         <tr> <!-- ligne-->
-          <th class= "top left"><a href=""></a></th> <!-- case en tête -->
-          <th class= "top middle"><a href=""></a></th>
-          <th class= "top right"><a href=""></a></th>
+          <td class="cell" id= "tl"  data-index='0' ></td> <!-- case en tête -->
+          <td class= "cell" id= "t"  data-index='1' ></td>
+          <td class= "cell" id= "tr"  data-index='2'></td>
         </tr>
         <tr>
-          <td class= "lefft"><a href=""></a></td><!-- case standard -->
-          <td class= "center"><a href=""></a></td>
-          <td class= "righht"><a href=""></a></td>
+          <td class= "cell" id= "left"  data-index='3'></td><!-- case standard -->
+          <td class= "cell" id= "center"  data-index='4'></td>
+          <td class= "cell" id= "right" data-index='5'></td>
         </tr>
         <tr>
-          <td class= "bottom left"><a href=""></a></td>
-          <td class= "bottom middle"><a href=""></a></td>
-          <td class= "bottom right"><a href=""></a></td>
+          <td class= "cell" id="bl" data-index='6'></td>
+          <td class= "cell" id= "b" data-index='7'></td>
+          <td class= "cell" id= "br"data-index='8'></td>
         </tr>
     </table>
   </div>
 
-   <div class="score">
-     <h1>Score</h1>
+   <div class="Players">
+     <h1>Players</h1>
+     <p id="player">Le joueur {{player}} doit jouer</p>
      <form>
-     <label for="name">Player 1</label>
+     <label for="name"></label>
         <input  type="text"  id="player-1"  placeholder="Enter Name"  autocomplete="off"  required/>
-      <label for="name">Player 2</label>
-        <input  type="text"  id="player-2"  placeholder="Enter Name"  autocomplete="off"  required/>
+      <label for="name"></label>
+        <input  type="text"  id="player-2"  placeholder="Enter Other Name"  autocomplete="off"  required/>
         <input type="submit" value="Submit" />
     </form>
+   </div>
+   <div class="score">
+     <h1>Score</h1>
+     <p>{{player1}} (croix) : XX</p>
+     <p>{{Joueur 2}} (rond) : XX</p>
+     <p>Match nul : XX</p>
    </div>
 
  <button class="reset">
@@ -44,7 +56,7 @@
 
 </section>
   <hr>
-  <script src = "tictactoe.js"></script>
+ <script src = "tictactoe.js"></script>
 
 </body>
 

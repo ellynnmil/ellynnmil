@@ -1,335 +1,218 @@
 const gameBoard = (() => {
-  console.log("Greetings Earthling 👋");
-  const h1 = document.querySelector("h1");
-  const startButton = document.querySelector(".start");
-  const menu = document.querySelector(".menu");
-  const gameBoard = document.querySelector(".game");
-  const board1 = document.querySelector(".board-one");
-  const board2 = document.querySelector(".board-two");
-  const squares = [...document.querySelectorAll(".square")];
-  const cells = [...document.querySelectorAll(".cell")];
-  const restart = document.querySelector(".restart");
-  const form = document.querySelector("form");
-  let turnX = true;
-  let gameOver = false;
-  const winningConditions = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
+    // Creates players
+    const playerFactory = (name, mark, ai, turn) => {
+        return { name, mark, ai, turn };
+    };
 
-  appear();
+    const player1 = playerFactory('player 1', 'X', false, true);
+    const player2 = playerFactory('Player 2', 'O', false, false);
 
-  //Title and start button become visible when page loads
-  function appear() {
-    h1.style.opacity = "1";
-    h1.style.transition = "1.5s";
-    startButton.style.transform = "scale(1)";
-    startButton.style.transition = ".5s";
-  }
+    // Possible win combinations
+    const winCombos = [
+        [0,1,2],
+        [0,3,6],
+        [3,4,5],
+        [6,7,8],
+        [1,4,7],
+        [2,4,6],
+        [2,5,8],
+        [0,4,8]
+    ];
 
-  //Shift menu up
-  function shiftUp() {
-    menu.style.position = "absolute";
-    menu.style.animation = "menu 1s";
-    menu.style.top = "5%";
-    startButton.style.display = "none";
-    newButtons();
-  }
+    let winner = null;
 
-  //create gamemode buttons
-  function newButtons() {
-    let buttonNode = document.createElement("div");
-    buttonNode.classList.add("buttons");
+    // Turn counter
+    let turns = 0;
 
-    const button1 = document.createElement("button");
-    button1.classList.add("btn1");
-    button1.innerHTML = `AI Bot<i class="fas fa-robot" id="btn-icons"></i>`;
+    // Board array
+    let board = [];
 
-    const button2 = document.createElement("button");
-    button2.classList.add("btn2");
-    button2.innerHTML = `Two Players<i class="fas fa-user-friends" id="btn-icons"></i>`;
+    // Winner combination array
+    let winnerCombo = [];
 
-    buttonNode.appendChild(button1);
-    buttonNode.appendChild(button2);
-    menu.appendChild(buttonNode);
+    // Function when making a move
+    const playerTurn = (function () {
+        const cell = document.querySelectorAll('.cell');
+        cell.forEach( cell => {
+            cell.addEventListener('click', e => {
+                // X player move if conditions are met
+                if (player1.turn == true && gameBoard.winner == null
+                    && e.target.textContent == '') {
+                    // Adds move to array
+                    board[e.target.id] = player1.mark;
+                    // Board styling
+                    cell.textContent = player1.mark;
+                    cell.style.color = '#EE6C4D';
+                    // Sets player turns
+                    player1.turn = false;
+                    player2.turn = true;
 
-    //Play with AI
-    button1.addEventListener("click", () => {
-      gameMode1 = true;
-      gameMode2 = false;
-      gameOver = false;
-      turnX = true;
-      restart.style.background = "var(--gray)";
-      document.querySelector("#player-turn").style.opacity = "0";
-      setTimeout(() => {
-        gameBoard.style.transition = "0.5s";
-        gameBoard.style.transform = "scale(1)";
-        board1.style.transform = "scale(1)";
-        board2.style.transform = "scale(0)";
-      }, 100);
-      basicAI();
-      closeForm();
-      deleteNames();
-      cells.forEach((cell) => {
-        cell.innerHTML = "<div></div>";
-      });
-    });
+                    console.log(board)
+                // O player move if conditions are met
+                } else if (player2.turn == true && gameBoard.winner == null
+                    && e.target.textContent == '' && player2.ai == false) {
+                    // Adds move to array
+                    board[e.target.id] = player2.mark;
+                    // Board styling
+                    cell.textContent = player2.mark;
+                    cell.style.color = '#98C1D9';
+                    // Sets player turns
+                    player1.turn = true;
+                    player2.turn = false;
 
-    //Two player tic tac toe
-    button2.addEventListener("click", () => {
-      gameMode1 = false;
-      gameMode2 = true;
-      gameOver = false;
-      turnX = true;
-      openForm();
-      deleteNames();
-      squares.forEach((square) => {
-        square.innerHTML = "<div></div>";
-      });
-    });
-  }
+                    console.log(board)
+                } else {
+                    return;
+                };
 
-  //Start of AI mode code
-  function emptyCells() {
-    return cells.filter((cell) => cell.innerText === "");
-  }
+                winCheck();
 
-  function basicAI() {
-    squares.forEach((square) => {
-      square.innerHTML = "<div></div>";
-    });
-    cells.forEach((cell) =>
-      cell.addEventListener("click", () => {
-        if (turnX && cell.innerHTML === `<div></div>` && !gameOver) {
-          cell.innerHTML = `<div class="x" id="x">X</div>`;
-          turnX = !turnX;
-          if (!turnX && emptyCells().length > 0 && !gameOver) {
-            emptyCells()[0].innerHTML = `<div class="o" id="o">O</div>`;
-            turnX = !turnX;
-          }
-        }
-        //Check for wins and tie
-        const playerTurn = document.querySelector("#player-turn");
-        if (checkWinOCell()) {
-          playerTurn.innerHTML = `AI wins this round! 🤠🎉`;
-          playerTurn.style.opacity = "1";
-          restart.innerHTML = `Play Again<i class="fas fa-redo" id="icon">`;
-          gameOver = true;
-        }
-        if (checkWinXCell()) {
-          playerTurn.innerHTML = `Human wins this round! 😉🎉`;
-          playerTurn.style.opacity = "1";
-          restart.innerHTML = `Play Again<i class="fas fa-redo" id="icon">`;
-          gameOver = true;
-        }
-        if (isTieCell()) {
-          playerTurn.innerHTML = `It's a tie!🤝`;
-          playerTurn.style.opacity = "1";
-          restart.innerHTML = `Play Again<i class="fas fa-redo" id="icon">`;
-          gameOver = true;
-        }
-      })
-    );
-  }
+                // Fade effect using opacity
+                cell.style.opacity = '1';
+            });
+        });
+        return { cell }
+    })();
 
-  function checkWinXCell() {
-    return winningConditions.some((combination) => {
-      return combination.every((i) => {
-        return cells[i].innerText === "X";
-      });
-    });
-  }
 
-  function checkWinOCell() {
-    return winningConditions.some((combination) => {
-      return combination.every((i) => {
-        return cells[i].innerText === "O";
-      });
-    });
-  }
+    // Checks for a winner
+    winCheck = () => {
+        turns++;
 
-  function isTieCell() {
-    return cells.every((cell) => {
-      return cell.innerText === "X" || cell.innerText === "O";
-    });
-  }
-  // End of AI mode code
+        // Seperates each player X | O move into 2 diffrent arrays
+        let xPlays = board.reduce((a, e, i) =>
+        (e === player1.mark) ? a.concat(i) : a, []);
+        let oPlays = board.reduce((a, e, i) =>
+        (e === player2.mark) ? a.concat(i) : a, []);
+        // Loop iterates over each winCombo array
+        for(let [index, combo] of winCombos.entries()) {
+            // Check if player moves index is equal to combo array index
+            if (combo.every(elem => xPlays.indexOf(elem) > -1)) {
 
-  //Start of two player mode code
-  function twoPlayers(e) {
-    const names = document.createElement("div");
-    names.classList.add("names");
+                gameBoard.winner = 'p1';
+                gameBoard.winnerCombo = combo;
 
-    // left side
-    const title1 = document.createElement("h4");
-    title1.setAttribute("id", "left-title");
-    title1.classList.add("left-title");
-    title1.innerHTML = "Player One:";
+            } else if (combo.every(elem => oPlays.indexOf(elem) > -1)) {
 
-    const player1 = document.querySelector("#player-1").value;
-    const playerOneName = document.createElement("h2");
-    playerOneName.setAttribute("id", "left-name");
-    playerOneName.classList.add("left-name");
-    playerOneName.innerHTML = `${player1}`;
+                gameBoard.winner = 'p2';
+                gameBoard.winnerCombo = combo;
 
-    let score1 = document.createElement("h3");
-    score1.setAttribute("id", "left-score");
-    score1.classList.add("left-score");
-    score1.innerHTML = 0;
+            } else if (gameBoard.winner == null && gameBoard.winner == undefined
+                && turns == 9) {
+                gameBoard.winner = 'tie';
+                gameBoard.winnerCombo = combo;
+            };
+        };
+        // Display the winner
+        console.log(turns, gameBoard.winner, winnerCombo)
+        winDisplay();
+        return winnerCombo;
+    };
+    // Resets board and display
+    gameReset = () => {
+        gameBoard.winner = null;
+        gameBoard.winnerCombo = undefined;
+        player1.turn = true;
+        player2.turn = false;
+        player2.ai = false;
+        turns = 0;
+        board.splice(0, board.length);
+        console.log(board, winner, player1.turn, player2.turn)
+    };
+    console.log(board, winner, player1.turn, player2.turn)
 
-    // right side
-    const title2 = document.createElement("h4");
-    title2.setAttribute("id", "right-title");
-    title2.classList.add("right-title");
-    title2.innerHTML = "Player Two:";
+    return { winCheck, gameReset, playerTurn, board, player2, winnerCombo };
+})();
 
-    const player2 = document.querySelector("#player-2").value;
-    const playerTwoName = document.createElement("h2");
-    playerTwoName.setAttribute("id", "right-name");
-    playerTwoName.classList.add("right-name");
-    playerTwoName.innerHTML = `${player2}`;
+// Controls the display
+const displayController = (() => {
+    const play = document.querySelector('.play');
+    const cell = document.querySelectorAll('.cell');
+    const winCtn = document.querySelector('.win-display');
+    // Display winner function
+    winDisplay = () => {
+        // Displays the win combo
+        combDisplay = () => {
+            for(i = 0; i < gameBoard.winnerCombo.length; i++) {
+                document.getElementById(gameBoard.winnerCombo[i]).style.
+                  backgroundColor = 'rgba(0, 0, 0, 0.040)';
+            };
+        };
+        // Displays the winner
+        if(gameBoard.winner === 'p1') {
+            winCtn.textContent = 'X Wins the round!';
+            combDisplay();
 
-    let score2 = document.createElement("h3");
-    score2.setAttribute("id", "right-score");
-    score2.classList.add("right-score");
-    score2.innerHTML = 0;
+        } else if (gameBoard.winner === 'p2') {
+            winCtn.textContent = 'O Wins the round!';
+            combDisplay();
 
-    names.appendChild(playerOneName);
-    names.appendChild(title1);
-    names.appendChild(score1);
-    names.appendChild(playerTwoName);
-    names.appendChild(title2);
-    names.appendChild(score2);
-    document.body.appendChild(names);
-    setTimeout(() => {
-      gameBoard.style.transition = "0.5s";
-      gameBoard.style.transform = "scale(1)";
-      board1.style.transform = "scale(0)";
-      board2.style.transform = "scale(1)";
-      restart.style.background = "var(--red)";
-      document.querySelector("#player-turn").style.opacity = "1";
-    }, 100);
+        } else if (gameBoard.winner === 'tie') {
+            winCtn.textContent = 'It\'s a tie!';
 
-    e.preventDefault();
-    e.target.reset();
-    closeForm();
-    playerTurn(player1, player2);
+        } else {
+            return;
+        };
 
-    if (gameMode2) {
-      squares.forEach((square) =>
-        square.addEventListener("click", () => {
-          if (turnX && square.innerHTML === `<div></div>` && !gameOver) {
-            square.innerHTML = `<div class="x" id="x">X</div>`;
-            turnX = !turnX;
-          } else if (
-            !turnX &&
-            square.innerHTML === `<div></div>` &&
-            !gameOver
-          ) {
-            square.innerHTML = `<div class="o" id="o">O</div>`;
-            turnX = !turnX;
-          }
-          playerTurn(player1, player2);
-          if (checkWinXSquare()) {
-            if (!gameOver) {
-              score1.innerHTML++;
-            }
-            const playerTurn = document.querySelector("#player-turn");
-            playerTurn.innerHTML = `${player1} wins this round! 😉🎉`;
-            restart.innerHTML = `Play Again<i class="fas fa-redo" id="icon">`;
-            gameOver = true;
-          }
-          if (checkWinOSquare()) {
-            if (!gameOver) {
-              score2.innerHTML++;
-            }
-            const playerTurn = document.querySelector("#player-turn");
-            playerTurn.innerHTML = `${player2} wins this round! 🤠🎉`;
-            restart.innerHTML = `Play Again<i class="fas fa-redo" id="icon">`;
-            gameOver = true;
-          }
-          if (isTieSquare()) {
-            const playerTurn = document.querySelector("#player-turn");
-            playerTurn.innerHTML = `It's a tie!🤝`;
-            restart.innerHTML = `Play Again<i class="fas fa-redo" id="icon">`;
-            gameOver = true;
-          }
-        })
-      );
-    }
-  }
+        resetBtn.style.display = 'flex';
+        console.log(gameBoard.winnerCombo)
+    };
+    // Board render
+    gamePlay = () => {
+        winCtn.style.display = 'block';
 
-  function checkWinXSquare() {
-    return winningConditions.some((combination) => {
-      return combination.every((i) => {
-        return squares[i].innerText === "X";
-      });
-    });
-  }
+        header.style.display = 'none';
 
-  function checkWinOSquare() {
-    return winningConditions.some((combination) => {
-      return combination.every((i) => {
-        return squares[i].innerText === "O";
-      });
-    });
-  }
 
-  function isTieSquare() {
-    return squares.every((square) => {
-      return square.innerText === "X" || square.innerText === "O";
-    });
-  }
-  //End of two player mode code
+        // playBtnAi.style.display = 'none';
 
-  function openForm() {
-    const name = document.querySelector(".name");
-    name.style.transform = "scale(1)";
-  }
+        play.style.display = 'flex';
 
-  function closeForm() {
-    const name = document.querySelector(".name");
-    name.style.transform = "scale(0)";
-  }
+    };
 
-  function deleteNames() {
-    document.querySelector(".names").remove();
-  }
 
-  function playerTurn(player1, player2) {
-    const playerTurn = document.querySelector("#player-turn");
-    if (turnX) {
-      playerTurn.innerHTML = `It's ${player1}'s turn!`;
-    } else {
-      playerTurn.innerHTML = `It's ${player2}'s turn!`;
-    }
-  }
+    // Resets board and display
+    gameReplay = () => {
+        gameBoard.gameReset();
 
-  //Event Listeners
-  startButton.addEventListener("click", shiftUp);
-  form.addEventListener("submit", twoPlayers);
-  restart.addEventListener("click", () => {
-    turnX = true;
-    gameOver = false;
-    restart.innerHTML = `Restart<i class="fas fa-redo" id="icon">`;
-    squares.forEach((square) => {
-      square.innerHTML = "<div></div>";
-    });
-    cells.forEach((cell) => {
-      cell.innerHTML = "<div></div>";
-    });
+        cell.forEach( cell => {
+            cell.textContent = '';
+            cell.style.opacity = '0';
+            cell.style.backgroundColor = 'white';
+        });
 
-    const icon = document.querySelector("#icon");
-    icon.classList.add("clicked");
+        resetBtn.style.display = 'none';
 
-    setTimeout(() => {
-      icon.classList.remove("clicked");
-    }, 300);
-  });
+        winCtn.textContent = '';
+    };
+
+    // Back to main button
+    mainPage = () => {
+        // styling
+        play.style.display = 'none';
+
+        winCtn.style.display = 'none';
+
+
+      //  playBtnAi.style.display = 'flex';
+
+        header.style.display = 'flex';
+        // Resets board and display
+        gameReplay();
+    };
+
+  //  const playBtnAi = document.getElementById('play-btn-ai');
+   // playBtnAi.addEventListener('click', gamePlayAi);
+
+    // Event listeners
+
+
+    const resetBtn = document.querySelector('.reset');
+    resetBtn.addEventListener('click', gameReplay);
+
+
+
+    const header = document.querySelector('header');
+
+    return { winDisplay, gamePlay }
 })();
