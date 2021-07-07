@@ -8,13 +8,13 @@ const gameBoard = (() => {
     const player2 = playerFactory('Player 2', 'O',  false);
 
     // Possible win combinations
-    var article = document.getElementById('tl');
-    article.dataset.index = 0;
-    var article = document.getElementById('t');
-    article.dataset.index = 1;
-    var article = document.getElementById('tr');
-    article.dataset.index = 2;
-    const winCombos = [
+    document.getElementById('tl');
+  //  dataset.index = 0;
+    document.getElementById('t');
+  //  dataset.index = 1;
+    document.getElementById('tr');
+  //  dataset.index = 2;
+    var winCombos = [
         [0,1,2],
         [0,3,6],
         [3,4,5],
@@ -39,17 +39,17 @@ const gameBoard = (() => {
     // Function when making a move
     const playerTurn = (function () {
         const cell = document.querySelectorAll('.cell');
-        cell.forEach( cell => {
-            cell.addEventListener('click', e => {
+        cell.forEach( (cell) => {
+        cell.addEventListener('click', e => {
                 // X player move if conditions are met
                 if (player1.turn == true && gameBoard.winner == null
                     && e.target.textContent == '') {
                     // Adds move to array
                     board[e.target.id] = player1.mark;
                     // Board styling
-                    cell.textContent = player1.mark;
+                    cell.textContent = player1.mark; //inscrit la marque du player 1
                     cell.style.color = 'white';
-                    // Sets player turns
+                    // Sets player turn
                     player1.turn = false;
                     player2.turn = true;
 
@@ -60,9 +60,9 @@ const gameBoard = (() => {
                     // Adds move to array
                     board[e.target.id] = player2.mark;
                     // Board styling
-                    cell.textContent = player2.mark;
+                    cell.textContent = player2.mark;  //inscrit la marque du player 2
                     cell.style.color = 'darkred';
-                    // Sets player turns
+                    // Sets player turn
                     player1.turn = true;
                     player2.turn = false;
 
@@ -75,11 +75,9 @@ const gameBoard = (() => {
         return { cell }
     })();
 
-
     // Checks for a winner
     winCheck = () => {
         turns++;
-
         // Seperates each player X | O move into 2 diffrent arrays
         let xPlays = board.reduce((a, e, i) =>
         (e === player1.mark) ? a.concat(i) : a, []);
@@ -99,10 +97,9 @@ const gameBoard = (() => {
                 gameBoard.winnerCombo = combo;
 
             } else if (gameBoard.winner == null && gameBoard.winner == undefined
-                && turns == 9) {
+                && turns == 9) { //toutes les cases sont utilisées
                 gameBoard.winner = 'tie';
-                gameBoard.winnerCombo = combo;
-            };
+                gameBoard.winnerCombo = combo; };
         };
         // Display the winner
         console.log(turns, gameBoard.winner, winnerCombo)
