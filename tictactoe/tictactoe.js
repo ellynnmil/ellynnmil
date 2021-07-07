@@ -1,13 +1,19 @@
 const gameBoard = (() => {
     // Creates players
-    const playerFactory = (name, mark, ai, turn) => {
-        return { name, mark, ai, turn };
+    const playerFactory = (name, mark,  turn) => {
+        return { name, mark, turn };
     };
 
-    const player1 = playerFactory('player 1', 'X', false, true);
-    const player2 = playerFactory('Player 2', 'O', false, false);
+    const player1 = playerFactory('player 1', 'X', true);
+    const player2 = playerFactory('Player 2', 'O',  false);
 
     // Possible win combinations
+    var article = document.getElementById('tl');
+    article.dataset.index = 0;
+    var article = document.getElementById('t');
+    article.dataset.index = 1;
+    var article = document.getElementById('tr');
+    article.dataset.index = 2;
     const winCombos = [
         [0,1,2],
         [0,3,6],
@@ -42,7 +48,7 @@ const gameBoard = (() => {
                     board[e.target.id] = player1.mark;
                     // Board styling
                     cell.textContent = player1.mark;
-                    cell.style.color = '#EE6C4D';
+                    cell.style.color = 'white';
                     // Sets player turns
                     player1.turn = false;
                     player2.turn = true;
@@ -50,25 +56,20 @@ const gameBoard = (() => {
                     console.log(board)
                 // O player move if conditions are met
                 } else if (player2.turn == true && gameBoard.winner == null
-                    && e.target.textContent == '' && player2.ai == false) {
+                    && e.target.textContent == '' ) {
                     // Adds move to array
                     board[e.target.id] = player2.mark;
                     // Board styling
                     cell.textContent = player2.mark;
-                    cell.style.color = '#98C1D9';
+                    cell.style.color = 'darkred';
                     // Sets player turns
                     player1.turn = true;
                     player2.turn = false;
 
-                    console.log(board)
-                } else {
-                    return;
-                };
+                    console.log(board)}
+                    else return 0;
 
                 winCheck();
-
-                // Fade effect using opacity
-                cell.style.opacity = '1';
             });
         });
         return { cell }
@@ -164,8 +165,6 @@ const displayController = (() => {
         header.style.display = 'none';
 
 
-        // playBtnAi.style.display = 'none';
-
         play.style.display = 'flex';
 
     };
@@ -194,8 +193,6 @@ const displayController = (() => {
         winCtn.style.display = 'none';
 
 
-      //  playBtnAi.style.display = 'flex';
-
         header.style.display = 'flex';
         // Resets board and display
         gameReplay();
@@ -209,7 +206,6 @@ const displayController = (() => {
 
     const resetBtn = document.querySelector('.reset');
     resetBtn.addEventListener('click', gameReplay);
-
 
 
     const header = document.querySelector('header');
