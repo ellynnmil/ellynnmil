@@ -35,20 +35,18 @@
 
    <div class="Players">
      <h1>Players</h1>
-     <p id="player">Le joueur {{player}} doit jouer</p>
      <form>
      <label for="name"></label>
-        <input  type="text"  id="player-1"  placeholder="Enter Name"  autocomplete="off"  required/>
+        <input  type="text"  id="player-1"  placeholder="Enter Name Player 1"  autocomplete="on"  required/>
       <label for="name"></label>
-        <input  type="text"  id="player-2"  placeholder="Enter Other Name"  autocomplete="off"  required/>
-        <input type="submit" value="Submit" />
+        <input  type="text"  id="player-2"  placeholder="Enter Name Player 2"  autocomplete="on"  required/>
+        <input type="submit" value="Commencer la partie" />
     </form>
    </div>
    <div class="score">
      <h1>Score</h1>
-     <p>{{player1}} (croix) : XX</p>
-     <p>{{Joueur 2}} (rond) : XX</p>
-     <p>Match nul : XX</p>
+     <p>{{player1}} (X) : XX</p>
+     <p>{{Joueur 2}} (O) : XX</p>
    </div>
 
  <button class="reset">
