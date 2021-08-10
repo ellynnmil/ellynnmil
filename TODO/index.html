@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>// TO-DO</title>
+</head>
+
+<body>
+<script src="DO.js"> </script>
+
+
+<div class="content">
+  <header>
+    <img class="logo" src="images/logo.png" alt="logo" align="center"/>
+  </header>
+  <nav class="sidebar">
+    <ul class="nav">
+      <li class="item" id="shop-nav">
+        <span class="name">Shopping</span>
+        <span class="shop-count" style="display: inline-flex;">0</span>
+      <li class="item" id="work-nav">
+        <span class="name">Work</span>
+        <span class="work-count" style="display: inline-flex;">0</span>
+      <li class="item" id="note-nav">
+        <span class="name">Notes</span>
+        <span class="notes-count" style="display: inline-flex;">0</span>
+    </ul>
+    <button id="addBtn"type="">+</button>
+  </nav>
+  <div class="main_container">
+    <main class="main">
+
+    </main>
+  </div>
+
+</div>
+
+<div class="popup">
+<form class="create-new">
+
+  <div class="create-header">
+    <h2 class="create-heading">Creer un nouveau...</h2>
+    <div class="create-close">&times;</div>
+  </div>
+
+  <div class="create-content">
+    <nav class="create-sidebar">
+      <ul class="create-options">
+         <li class="create-items" id="new-shop-link">Shopping</li> <!--1er menu -->
+         <li class="create-items" id="new-work-link">Travail</li> <!--2eme menu -->
+         <li class="create-items" id="new-note-link">Notes</li> <!--3eme menu -->
+    	</ul>
+    </nav>
+<!--1er menu -->
+    <div class="create-shop">
+      <textarea placeholder="Titre: Liste pour demain" id="new-title" name="new-title" maxlength="40" required=""></textarea>
+      <input type="submit"  id="shop-submit" value="Ajouter au shopping">
+    </div>
+<!--2eme menu -->
+  <div class="create-work">
+      <textarea placeholder="Intitulé de la tâche" id="new-tache" name="new-tache" maxlength="40" required=""></textarea>
+          <div class="create-date">
+          <div class="create-date-title"> Date:</div>
+          <input type="date" id="new-date" name="new-date" placeholder="JJ/MM/AAAA "required="">
+      </div>
+      <input type="submit"  id="work-submit" value="Ajouter tâche">
+  </div>
+<!--3eme menu -->
+  <div class="create-note">
+      <textarea placeholder="Titre: Anniversaire Mia le 12" id="new-note" name="new-note" maxlength="40" required=""></textarea>
+      <textarea placeholder="détail:" id="new-info" name="new-info"></textarea>
+      <input type="submit"  id="note-submit" value="Poster la note">
+  </div>
+</form>
+</div>
+
+</body>
+
+</html>
