@@ -1,0 +1,33 @@
+<!Doctype html>
+</html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="stylebook.css">
+    <title>Library</title>
+</head>
+<body>
+  <h1>Library Project</h1>
+  <div id='newBtn-Container'>
+      <button id='newBtn'>+ New Book</button>
+  </div>
+   <div id="popUp">
+      <form id='form' action='/book.js'>
+          <span class="close">&times;</span>
+          <ledgend>New Book</ledgend>
+          <div id='textInput'>
+              <textarea  id='title' name='title' placeholder="title"></textarea>
+              <p><input type='text' id='author' name='author' placeholder="title"></p>
+              <p><input type='number' id='pages' name='pages>'</p>
+          </div>
+          <div id='checkBox'>
+              <p><label >Read: </label><input type='checkbox' id='read' name='read' value='yes'></p>
+          </div>
+          <button type='submit' form='form' id='addBtn'>Add</button>
+      </form>
+  </div>
+    <div id='Library-container'></div>
+
+      <script src="book.js"></script>
+  </body>
+
+  </html>

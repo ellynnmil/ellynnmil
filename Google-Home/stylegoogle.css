@@ -1,0 +1,163 @@
+h1 {
+  margin-top: : 9em;
+  padding-top: 1em;
+  text-align:center;
+}
+
+body {
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.tout {
+  width: 100%;
+  height: 100%;
+}
+
+
+div.page {
+  margin: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+ul.list{
+  list-style: none;
+ display: flex;
+ align-items: center;
+ justify-content: flex-end;
+
+}
+
+ul.list li {
+  float: left;
+  display : block;
+  padding: 19px 16px;
+  text-align: center;
+  height: 10px;
+  width: 10px;
+  position: relative;
+}
+
+div.img {
+    text-align:center;
+    padding-top: 20px;
+}
+
+.main__input {
+  margin-top: 1px;
+  position: relative;
+}
+
+.main__form {
+  max-width: 580px;
+  margin: 0 auto;
+}
+.form__group {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 44px;
+  width: 100%;
+  border: 3px solid #dfe1e5;
+  border-radius: 24px;
+  padding: 5px 8px 0 16px;
+}
+.form__group:hover {
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+  border-color: rgba(223, 225, 229, 0);
+}
+.form__logo--search {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -5px;
+  margin-right: 7px;
+}
+
+.form__logo--search svg {
+  height: 20px;
+  width: 20px;
+}
+
+.form__input {
+  height: 100%;
+  flex: 1;
+}
+.form__input input {
+  border: none;
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  margin-top: -3px;
+  color: #101010;
+}
+.form__input input:focus {
+  outline: none;
+}
+
+
+.liens {
+    text-align:center;
+      padding-top: 220px;
+}
+
+ul.navbar {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: pink;
+  overflow: hidden;
+}
+
+ul.navbar li {
+  float: left;
+}
+
+li a {
+  display : block;
+  color: gray;
+  text-decoration: none;
+  padding: 14px 16px;
+  text-align: center;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+ul.menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background-color: black;
+  width: 200px;
+  overflow: hidden;
+}
+
+.searchbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 580px;
+  padding: 1rem;
+  padding-right: 1.5rem;
+  border: 0.1px solid var(--border-color);
+  border-radius: 30px;
+}
+
+.searchbar:hover,
+.searchbar:focus-within {
+  border-color: white;
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+}
+
+p,
+label {
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input {
+    margin: .4rem;
+}
