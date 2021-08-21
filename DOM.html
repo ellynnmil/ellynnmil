@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">  <!--type-->
+<html>
+
+<head>  <!--n'apparait pas-->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title> Juste pour voir le DOM</title>
+  <link rel="stylesheet" type="text/css" href="styleDOM.css">
+</head>
+
+
+<!-- your html file: -->
+<body>
+  <h1>
+    Je m'entraine aux DOM
+  </h1>
+  <h3 id="soustitre"></h3>
+  <div id="container"></div>
+  <div id="bordure"></div>
+  <button id="btn">Click Me </button>
+  <!--<button id="btnt">Click Me too</button>-->
+
+</body>
+
+<script>
+const container = document.querySelector('#container');
+
+  const content = document.createElement('div'); //on créé un div qu'on stock dans content
+  content.classList.add('content'); //on lui ajoute une classe
+  content.textContent = 'This is the glorious text-content!'; //et du texte
+
+  const para = document.createElement('p');
+  para.classList.add('para');
+  para.textContent = "Hé, je suis rouge";
+  para.setAttribute("style", "color:red");
+
+const soustitre = document.querySelector('#soustitre');
+  const contenant = document.createElement('h3'); //on créé un h3 qu'on stock dans contenant
+  contenant.classList.add('contenant');
+  contenant.textContent = "Je suis h3 bleu";
+  contenant.setAttribute("style","color:blue");
+
+const bordure = document.querySelector('#bordure');
+  bordure.classList.add('bordure');
+
+  const autretitre = document.createElement('h1'); //on créé un h1 qu'on stock dans bordure
+  autretitre.classList.add('autretitre'); //on lui ajoute une classe
+  autretitre.textContent = 'Je suis dans un div'; //et du texte
+
+  const jaloux = document.createElement('p');
+  jaloux.classList.add('jaloux');
+  jaloux.textContent = "MOI AUSSI !!!";
+
+  function alertFunction() {  // méthode 3 qui permet de cleaner un peu
+    alert("YAY! YOU DID IT!");
+    }
+  /*  btnt.addEventListener('click', alertFunction); // 1 seule ligne*/
+
+const btn = document.querySelector('#btn'); //methode 3, plus complexe
+  btn.addEventListener('click',function (e) {
+    console.log(e);
+  });
+
+
+
+
+container.appendChild(content); //puis on ajoute ce div à container
+container.appendChild(para);
+soustitre.appendChild(contenant); //j'ajoute ce h3 à soustitre
+bordure.appendChild(autretitre);
+bordure.appendChild(jaloux);
+
+</script>
+
+</html>
