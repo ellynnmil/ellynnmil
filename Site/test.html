@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Comment créer un panier en JavaScript">
+    <meta name="author" content="1FORMATIK.com">
+    <title>Comment créer un panier en JavaScript</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  </head>
+<body>
+<div class="container bg-light rounded">
+<div class="row">
+  <div class="col-md-12 mt-3">
+      <div class="row mt-3">
+            <div class="col-md-4">
+                <p>50 streams (100 €)</p>
+            </div>
+            <div class="col-md-2">
+
+              </div>
+                  <div class="col-md-2">
+              </div>
+      </div>
+      <div class="col-md-4 text-end">
+              <a style="cursor:pointer;" data-nom="50 streams" data-prix="100" data-select="01" data-checkbox="produit_001" class="btn btn-primary ajouter-panier">ajouter au panier</a>
+        </div>
+  </div>
+  <div class="row mt-3">
+      <div class="col-md-4">
+        <p>Produit 02 (50 €)</p>
+      </div>
+      <div class="col-md-2">
+      </div>
+      <div class="col-md-6 text-end">
+        <a style="cursor:pointer;" data-nom="Produit 02" data-prix="50" data-select="02" class="btn btn-primary ajouter-panier">ajouter au panier</a>
+      </div>
+  </div>
+  <div class="row mt-4">
+      <div class="col-md-4">
+        <p>Produit 03 (75 €)</p>
+      </div>
+      <div class="col-md-8 text-end">
+        <a style="cursor:pointer;" data-nom="Produit 03" data-prix="75" class="btn btn-primary ajouter-panier">ajouter au panier</a>
+      </div>
+  </div>
+</div>
+<div class="row">
+<div class="col-md-12 mt-3">
+<h4>Votre commande</h4>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12 mt-3">
+Nombre de produit(s) dans le panier : <span class="total-count"></span>
+<br /><br />
+<table width="100%" class="show-panier" id="macommande"></table>
+<br />
+<br />
+<div>*Prix total: <b><span class="total-panier" id="prix_total">0.00</span> euros</b></div>
+<br />
+
+<div class="text-end"><button class="clear-panier btn btn-danger">Vider le panier</button></div>
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script>
+var Qte_Minimum = 0;
+
+// Nombre de produits minimum par lot
+var Qte_Minimum_Valeur = 6;
+
+// 0 pour désactiver l'ajout du prix de la livraison
+// 1 pour activer la fonctionnalité de modification du prix total pour inclure le prix de la livraison selon un pourcentage du prix total
+// 2 pour activer la fonctionnalité de modification du prix total pour inclure le prix de la livraison selon un forfait fixe
+
+
+
+// ne pas modifier la suite sauf si vous désirez modifier le code
+var MonPanier = (function() {
+panier = [];
+function Item(nom, prix, quantite) {
+this.nom = nom;
+this.prix = prix;
+this.quantite = quantite;
+}
+
+function savepanier() {
+sessionStorage.setItem('MonPanier', JSON.stringify(panier));
+}
+
+function loadpanier() {
+panier = JSON.parse(sessionStorage.getItem('MonPanier'));
+}
+if (sessionStorage.getItem("MonPanier") != null) {
+loadpanier();
+}
+
+var obj = {};
+
+obj.ajouter_produit_dans_panier = function(nom, prix, quantite) {
+for(var item in panier) {
+  if(panier[item].nom === nom) {
+panier[item].quantite ++;
+savepanier();
+return;
+  }
+}
+var item = new Item(nom, prix, quantite);
+panier.push(item);
+savepanier();
+}
+
+obj.setquantiteForItem = function(nom, quantite) {
+for(var i in panier) {
+  if (panier[i].nom === nom) {
+panier[i].quantite = quantite;
+break;
+  }
+}
+};
+
+obj.enlever_produit_de_panier = function(nom) {
+  for(var item in panier) {
+if(panier[item].nom === nom) {
+  panier[item].quantite --;
+  if(panier[item].quantite === 0) {
+panier.splice(item, 1);
+  }
+  break;
+}
+}
+savepanier();
+}
+
+obj.enlever_produit_de_panier_tous = function(nom) {
+for(var item in panier) {
+  if(panier[item].nom === nom) {
+panier.splice(item, 1);
+break;
+  }
+}
+savepanier();
+}
+
+obj.clearpanier = function() {
+panier = [];
+savepanier();
+}
+
+obj.totalquantite = function() {
+var totalquantite = 0;
+for(var item in panier) {
+  totalquantite += panier[item].quantite;
+}
+return totalquantite;
+}
+
+obj.totalpanier = function() {
+var totalpanier = 0;
+for(var item in panier) {
+  totalpanier += panier[item].prix * panier[item].quantite;
+}
+return Number(totalpanier.toFixed(2));
+}
+
+obj.listpanier = function() {
+var panierCopy = [];
+for(i in panier) {
+  item = panier[i];
+  itemCopy = {};
+  for(p in item) {
+itemCopy[p] = item[p];
+  }
+  itemCopy.total = Number(item.prix * item.quantite).toFixed(2);
+  panierCopy.push(itemCopy)
+}
+return panierCopy;
+}
+
+return obj;
+})();
+
+$('.ajouter-panier').click(function(event) {
+  event.preventDefault();
+   var nom = $(this).data('nom');
+  var prix = Number($(this).data('prix'));
+  MonPanier.ajouter_produit_dans_panier(nom, prix, 1);
+  afficherpanier();
+});
+
+$('.clear-panier').click(function() {
+  MonPanier.clearpanier();
+  afficherpanier();
+});
+
+function afficherpanier() {
+  var panierArray = MonPanier.listpanier();
+  var output = "";
+  for(var i in panierArray) {
+    output += "<tr>"
+      + "<td>" + panierArray[i].nom + "</td>"
+      + "<td>(" + panierArray[i].prix.toFixed(2) + ")</td>"
+      + "<td class='form-inline'><div class='input-group'><button class='btn btn-primary moins-item' data-nom='" + panierArray[i].nom + "'>-</button>"
+      + "<input type='number' min='1' class='form-control item-quantite' data-nom='" + panierArray[i].nom + "' value='" + panierArray[i].quantite + "'>"
+      + "<button class='btn btn-primary plus-item' data-nom='" + panierArray[i].nom + "'>+</button></div></td>"
+      + "<td><button class='btn btn-danger effacer-item' data-nom='" + panierArray[i].nom + "'>supp</button></td>"
+      + " = "
+      + "<td>" + panierArray[i].total + "</td>"
+      +  "</tr>";
+  }
+  $('.show-panier').html(output);
+
+$('.total-panier').html(((MonPanier.totalpanier())).toFixed(2));
+
+  $('.total-panier-modal').html(MonPanier.totalpanier());
+  $('.total-quantite').html(MonPanier.totalquantite());
+
+}
+
+$('.show-panier').on("click", ".effacer-item", function(event) {
+  var nom = $(this).data('nom')
+  MonPanier.enlever_produit_de_panier_tous(nom);
+  afficherpanier();
+})
+
+$('.show-panier').on("click", ".moins-item", function(event) {
+  var nom = $(this).data('nom')
+  MonPanier.enlever_produit_de_panier(nom);
+  afficherpanier();
+})
+
+$('.show-panier').on("click", ".plus-item", function(event) {
+  var nom = $(this).data('nom')
+  MonPanier.ajouter_produit_dans_panier(nom);
+  afficherpanier();
+})
+
+$('.show-panier').on("change", ".item-quantite", function(event) {
+   var nom = $(this).data('nom');
+   var quantite = Number($(this).val());
+  MonPanier.setquantiteForItem(nom, quantite);
+  afficherpanier();
+});
+
+afficherpanier();
+</script>
+
+</body>
+</html>

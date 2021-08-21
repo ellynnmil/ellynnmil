@@ -1,0 +1,63 @@
+<!Doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styletictactoe.css">
+    <title>Tic Tac Toe game</title>
+</head>
+<body>
+
+  <header>
+      <h1 class="header">Tic-Tac-Toe</h1>
+
+    </header>
+
+<section class="gameplay">
+
+
+    <table class ="play">
+        <tr> <!-- ligne-->
+          <td class="cell" id= "tl"  data-index='0' ></td> <!-- case en tête -->
+          <td class= "cell" id= "t"  data-index='1' ></td>
+          <td class= "cell" id= "tr"  data-index=2></td>
+        </tr>
+        <tr>
+          <td class= "cell" id= "left"  data-index='3'></td><!-- case standard -->
+          <td class= "cell" id= "center"  data-index='4'></td>
+          <td class= "cell" id= "right" data-index='5'></td>
+        </tr>
+        <tr>
+          <td class= "cell" id= "bl" data-index='6'></td>
+          <td class= "cell" id= "b" data-index='7'></td>
+          <td class= "cell" id= "br" data-index='8'></td>
+        </tr>
+    </table>
+  </div>
+
+   <div class="Players">
+     <h1>Players</h1>
+     <form>
+     <label for="name"></label>
+        <input  type="text"  id="player-1"  placeholder="Enter Name Player 1"  autocomplete="on"  required/>
+      <label for="name"></label>
+        <input  type="text"  id="player-2"  placeholder="Enter Name Player 2"  autocomplete="on"  required/>
+        <input type="submit" value="Commencer la partie" />
+    </form>
+   </div>
+   <div class="score">
+     <h1>Score</h1>
+     <p>{{player1}} (X) : XX</p>
+     <p>{{Joueur 2}} (O) : XX</p>
+   </div>
+
+ <button class="reset">
+    <a href="tictactoe.html"> Retry ?
+  </button>
+
+</section>
+  <hr>
+ <script src = "tictactoe.js"></script>
+
+</body>
+
+</html>

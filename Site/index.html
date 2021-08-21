@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="utf-8">
+  <title>Artistic Stream</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<header>
+  <nav class="bar">
+    <ul class="menu">
+      <li class="choice" id="home"> Home </li>
+      <li class="choice" id="prices"> Prices </li>
+    </ul>
+  </nav>
+</header>
+
+
+<body>
+<!--homme page-->
+  <div class="home-page">
+    <h2 class="title"> Artistic Stream </h2>
+    <img class="deco" src="images/spoti.png" alt="image" height="100"/>
+    <div class="presentation">
+      <p class="text"> Hello, my name is Tanguy, and this is my shop.
+      Hihi, my sister dit it. </p>
+      <p class="text3">Cette boîte utilisera des transitions pour width, height, background-color, transform.
+   Survolez cette boîte pour voir l'effet.</p>
+    <div class="box"></div>
+    </div>
+  </div>
+
+<!--prices page-->
+  <div class="price-page">
+    <h2 class="title"> Artistic Stream </h2>
+    <img class="deco2" src="images/spoti.png" alt="image" height="100"/>
+    <div class="subpart">
+    <div class="subtitle" id="family">
+      <h3 class="name"> Stream Family Uk </h3>
+      <ul class="item" id="nb-family">
+        <li> 50k streams
+        <li> 100k streams
+        <li> 200k streams
+        <li> 500k streams
+        <li> 1M streams
+      </ul>
+      <ul class="item" id="cost-family">
+        <li class="price"> 50
+        <li class="price"> 90
+        <li class="price"> 170
+        <li class="price"> 400
+        <li class="price"> 750
+      </ul>
+      <ul class="item" id="add-family">
+        <a style="cursor:pointer;" data-nom="50k streams family" data-prix="50"  class="btn btn-primary ajouter-panier">Add to cart</a></br>
+        <a style="cursor:pointer;" data-nom="100k streams family" data-prix="90"  class="btn btn-primary ajouter-panier">Add to cart</a></br>
+        <a style="cursor:pointer;" data-nom="200k streams family" data-prix="170" class="btn btn-primary ajouter-panier">Add to cart</a></br>
+        <a style="cursor:pointer;" data-nom="500k streams family" data-prix="400" class="btn btn-primary ajouter-panier">Add to cart</a></br>
+        <a style="cursor:pointer;" data-nom="1M streams family" data-prix="750"  class="btn btn-primary ajouter-panier">Add to cart</a></br>
+      </ul> </br>
+      <span class="paye" id"first"> Paye of 4$/1k streams </span>
+    </div>
+    <div class="subtitle" id="gc">
+      <h3 class="name"> Stream GC Uk </h3>
+      <ul class="item" id="nb-gc">
+        <li> 50k streams
+        <li> 100k streams
+        <li> 200k streams
+        <li> 500k streams
+        <li> 1M streams
+      </ul>
+      <ul class="item" id="cost-gc">
+        <li class="price"> 75
+        <li class="price"> 135
+        <li class="price"> 250
+        <li class="price"> 600
+        <li class="price"> 1100
+      </ul>
+      <ul class="item" id="add-gc">
+        <a style="cursor:pointer;" data-nom="50k streams gc" data-prix="75"  class="btn btn-primary ajouter-panier">Add to cart</a></br>
+        <a style="cursor:pointer;" data-nom="100k streams gc" data-prix="135" class="btn btn-primary ajouter-panier">Add to cart</a></br>
+        <a style="cursor:pointer;" data-nom="200k streams gc" data-prix="250"class="btn btn-primary ajouter-panier">Add to cart</a></br>
+        <a style="cursor:pointer;" data-nom="500k streams gc" data-prix="600" class="btn btn-primary ajouter-panier">Add to cart</a></br>
+        <a style="cursor:pointer;" data-nom="1M streams gc" data-prix="1100" class="btn btn-primary ajouter-panier">Add to cart</a></br>
+      </ul></br>
+    <span class="paye" id="second"> Paye of 7$/1k streams </span>
+    </div>
+    </div>
+    <input id="go-to" type="submit" value="Go to Cart">
+
+
+  </div>
+
+
+<!--panier page-->
+<div class="shop-page">
+  <h2 class="title"> Artistic Stream </h2>
+  <h3 class="name"> Shopping Cart </h3>
+  <button id="return">Return</button>
+    <div class="subtitle">
+    <h4>Votre commande</h4>
+    </div>
+    <table width="100%" class="show-panier" id="macommande"></table>
+    <br />
+    <br />
+    <div>*Total price: <b><span class="total-panier" id="prix_total">0.00</span> euros</b></div>
+    <br />
+    <div class="text-end"><button class="clear-panier btn btn-danger">Vider le panier</button></div>
+
+
+<button id="confirm">Confirm command</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="main.js"> </script>
+</body>
+</html>

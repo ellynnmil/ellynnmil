@@ -1,0 +1,58 @@
+body {
+  padding-left: 11em;
+  font-family: Georgia, "Times New Roman",  <!--police, si absente prendre la suivante-->
+            Times, serif;
+  color: gray;
+  background-color: #white}
+
+  div p{
+    color : black;
+  }
+  p.centrer{
+    text-align:center;
+  }
+
+  ul.navbar {
+   list-style-type: none;
+   padding: 0;
+   margin: 0;
+   position: absolute;
+   top: 2em;
+   left: 1em;
+   width: 9em }
+
+   li{
+     color: green;
+
+   }
+  ul.emo {
+    list-style-type: "\1F44D";
+  }
+
+  ul.navbar li {
+       background:#33FFDD;
+       margin: 0.5em 0;
+       padding: 0.3em;
+       border-right: 1em solid gray }
+
+  ul.navbar a {
+       text-decoration: none }
+  a:link {
+     color: black }
+  a:visited {
+     color: purple }
+
+  h1 {
+   font-family: Helvetica, Geneva, Arial,
+         SunSans-Regular, sans-serif }
+
+ h1.shadow{
+    text-shadow: 1px 1px 0 red, 2px 2px 0 yellow, 3px 3px 0 green, 4px 4px 0 blue;
+  	/* On agrandit le texte pour mieux y voir */
+    	font-size: 30px;
+  font-weight: bold;}
+
+ address{
+    margin-top: 5em;
+    padding-top: 1em;
+    border-top: thin dotted }

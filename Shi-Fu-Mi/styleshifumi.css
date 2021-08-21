@@ -1,0 +1,39 @@
+
+body {
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+.play {
+  background-color: #414040;
+  padding: 100px;
+
+}
+
+.compteur {
+  font-size: 20pt;
+  color: white;
+  margin-top: 10px;
+}
+
+.computer{
+  text-align: left
+}
+
+.player{
+text-align: right
+}
+
+.choice{
+  font-size: 20pt;
+  color: white;
+  text-align: center;
+}
+
+.buttons{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: white;
+  grid-gap: 15px;
+  grid-auto-rows: minmax(70px, auto);
+
+}
